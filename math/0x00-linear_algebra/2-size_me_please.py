@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+""" Calculate the shape of a matrix, returned as a list of integers """
+
+
 def matrix_shape(matrix):
     """matrix_shape :  that calculates the shape of a matrix
 

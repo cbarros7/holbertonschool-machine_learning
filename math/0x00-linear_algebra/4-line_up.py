@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""adds two arrays"""
+
+
 def add_arrays(arr1, arr2):
     """add_arrays : adds two arrays element-wise
 

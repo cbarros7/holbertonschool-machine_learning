@@ -12,11 +12,7 @@ def matrix_shape(matrix):
     if not matrix:
         return None
 
-    row = len(matrix)
-    col = len(matrix[0])
+    if not isinstance(matrix[0], list):
+        return [len(matrix)]
 
-    if isinstance(matrix[0][0], int):
-        return [row, col]
-    else:
-        elements = len(matrix[0][0])
-        return [row, col, elements]
+    return [len(matrix)] + matrix_shape(matrix[0])

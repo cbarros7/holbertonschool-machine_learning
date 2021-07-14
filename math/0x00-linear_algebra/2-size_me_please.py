@@ -9,6 +9,9 @@ def matrix_shape(matrix):
     Args:
         matrix: matrix to be dimensioned
     """
+    if not matrix:
+        return None
+
     row = len(matrix)
     col = len(matrix[0])
 

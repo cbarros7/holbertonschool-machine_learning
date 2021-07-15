@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """calculates the shape"""
-import numpy as np
 
 
 def np_shape(matrix):
@@ -12,11 +11,11 @@ def np_shape(matrix):
     _shape = []
     if len(matrix.tolist()) == 0:
         _shape.append(0)
-    elif isinstance(matrix[0], np.int64):
-        _shape.append(len(matrix))
-    else:
+    elif isinstance(matrix.tolist()[0], list):
         _shape.append(len(matrix))
         _shape.append(len(matrix[0]))
         _shape.append(len(matrix[0][0]))
+    else:
+        _shape.append(len(matrix))
 
     return tuple(_shape)

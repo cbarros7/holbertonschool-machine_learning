@@ -3,13 +3,13 @@
 
 
 def np_elementwise(mat1, mat2):
-    """np_elementwise: performs element-wise addition, subtraction, multiplication, and division
+    """np_elementwise: performs element-wise addition,
+                        subtraction, multiplication, and division
 
     Args:
         mat1: First matrix to realize operations
         mat2: Second matrix to realize operations
     """
-    #result = []
     sum_ = (mat1 + mat2)[0:]
     subs_ = (mat1 - mat2)[0:]
     mul_ = (mat1 * mat2)[0:]

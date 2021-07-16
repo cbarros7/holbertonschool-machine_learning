@@ -10,4 +10,4 @@ def np_matmul(mat1, mat2):
         mat1 : First matrix
         mat2 : Second matrix
     """
-    return np.matrix(mat1) * np.matrix(mat2)
+    return np.mat(mat1) * np.mat(mat2)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Matrix multiplication"""
+"""Matrix multiplication. Dot product"""
 import numpy as np
 
 
@@ -10,4 +10,4 @@ def np_matmul(mat1, mat2):
         mat1 : First matrix
         mat2 : Second matrix
     """
-    return np.mat(mat1) * np.mat(mat2)
+    return mat1 @ mat2

@@ -12,4 +12,4 @@ def summation_i_squared(n):
         return None
     elif n == 1:
         return n
-    return n**2 + summation_i_squared(n - 1)
+    return sum(map(lambda i: i ** 2, range(1, n + 1)))

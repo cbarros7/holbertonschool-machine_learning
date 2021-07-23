@@ -1,12 +1,24 @@
 #!/usr/bin/env python3
-""" function that  calculates the integral of a polynomial """
+"""calculates the integral of a polynomial"""
 
 
 def poly_integral(poly, C=0):
-    """ calculates integral and returns list of coefficients """
-    if not all(type(C) in (float, int) for c in poly) or type(C) != int:
+    """
+    poly_integral: function that does integral of a polynomialx
+    """
+    if (type(poly) is not list or len(poly) == 0) or \
+        (type(C) is not int and type(C) is not float):
         return None
-    integral = [c/i if c % i != 0 else c//i for i, c in enumerate(poly, 1)]
-    while len(integral) > 0 and integral[-1] == 0:
-        integral.pop()
-    return [C] + integral
+    
+    if len(poly) == 1 and poly[0] == 0:
+        return [C]
+    
+    new = [C]
+    for i in range(len(poly)):
+        p = (poly[i] / (i + 1))
+        if p == int(p):
+            new.append(int(p))
+        else:
+            new.append(p)
+            
+    return new

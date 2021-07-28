@@ -7,11 +7,12 @@ class Exponential():
         """Constructor
 
         Args:
-            data:  data to be used to estimate the distribution. Defaults to None.
-            lambtha: number of occurences in a given time frame. Defaults to 1.
+            data:  data to be used to estimate the distribution.
+                    Defaults to None.
+            lambtha: number of occurences in a given time frame.
+                    Defaults to 1.
         """
         self.lambtha = float(lambtha)
-        
         if data is None:
             if lambtha <= 0:
                 raise ValueError("lambtha must be a positive value")
@@ -22,24 +23,24 @@ class Exponential():
                 raise ValueError("data must contain multiple values")
             else:
                 self.lambtha = len(data) / sum(data)
-                
+
     def pdf(self, x):
-        """pmf: Calculates the value of the PMF for a given number of “successes”
+        """pmf: Calculates the value of the PMF for a
+                given number of “successes”
 
         Args:
-            x: number of “successes” 
+            x: number of “successes”
         """
         if x < 0:
             return 0
         x = int(x)
         return (self.lambtha * pow(2.7182818285, -self.lambtha * x))
-    
-    
+
     def cdf(self, x):
         """cdf: CDF for a given number of “successes”
 
         Args:
-            x : number of “successes” 
+            x : number of “successes”
         """
         if x < 0:
             return 0

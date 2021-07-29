@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Binomial distribution class """
 
+
 def factorial(n):
     """ returns factorial of n """
     if n < 0:
@@ -49,5 +50,3 @@ class Binomial:
         for i in range(0, int(k) + 1):
             sum_cdf += self.pmf(i)
         return sum_cdf
-
-

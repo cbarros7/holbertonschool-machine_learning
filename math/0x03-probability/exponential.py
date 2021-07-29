@@ -21,7 +21,7 @@ class Exponential():
         else:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
-            elif len(data) <= 1:
+            elif len(data) <= 2:
                 raise ValueError("data must contain multiple values")
             else:
                 self.lambtha = len(data) / sum(data)

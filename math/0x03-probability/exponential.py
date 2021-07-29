@@ -34,8 +34,7 @@ class Exponential():
             x: number of “successes”
         """
         if x < 0:
-            return 0
-        x = int(x)        
+            return 0       
         return self.lambtha * self.e**(-self.lambtha*x)
 
     def cdf(self, x):
@@ -46,5 +45,4 @@ class Exponential():
         """
         if x < 0:
             return 0
-        x = int(x)
         return 1 - self.e**(-self.lambtha*x)

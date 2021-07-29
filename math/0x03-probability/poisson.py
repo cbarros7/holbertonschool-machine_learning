@@ -2,6 +2,17 @@
 """Poisson"""
 
 
+def factorial(n):
+    """ returns the factorial of n """
+    if n < 0:
+        return None
+    if n == 0:
+        return 1
+    if n < 2:
+        return 1
+    return n * factorial(n-1)
+
+
 class Poisson():
     def __init__(self, data=None, lambtha=1.):
         """Constructor
@@ -48,14 +59,3 @@ class Poisson():
             return 0
         k = int(k)
         return sum([self.pmf(n) for n in range(k + 1)])
-
-
-def factorial(n):
-    """ returns the factorial of n """
-    if n < 0:
-        return None
-    if n == 0:
-        return 1
-    if n < 2:
-        return 1
-    return n * factorial(n-1)

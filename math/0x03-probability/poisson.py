@@ -14,6 +14,8 @@ def factorial(n):
 
 
 class Poisson():
+    """Poisson class
+    """
     def __init__(self, data=None, lambtha=1.):
         """Constructor
 

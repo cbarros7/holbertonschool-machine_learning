@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """ Normal"""
-import math
 
 
 class Normal():
+    """Normal class
+    """
     def __init__(self, data=None, mean=0., stddev=1.):
         """Constructor
 

@@ -3,6 +3,8 @@
 
 
 class Exponential():
+    """Exponential class
+    """
     def __init__(self, data=None, lambtha=1.):
         """Constructor
 

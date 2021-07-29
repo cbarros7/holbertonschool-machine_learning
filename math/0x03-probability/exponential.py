@@ -15,6 +15,7 @@ class Exponential():
                     Defaults to 1.
         """
         self.lambtha = float(lambtha)
+        self.e = 2.7182818285
         if data is None:
             if lambtha <= 0:
                 raise ValueError("lambtha must be a positive value")
@@ -34,8 +35,8 @@ class Exponential():
         """
         if x < 0:
             return 0
-        x = int(x)
-        return (self.lambtha * pow(2.7182818285, -self.lambtha * x))
+        x = int(x)        
+        return self.lambtha * self.e**(-self.lambtha*x)
 
     def cdf(self, x):
         """cdf: CDF for a given number of “successes”
@@ -46,4 +47,4 @@ class Exponential():
         if x < 0:
             return 0
         x = int(x)
-        return (1 - pow(2.7182818285, -self.lambtha * x))
+        return 1 - self.e**(-self.lambtha*x)

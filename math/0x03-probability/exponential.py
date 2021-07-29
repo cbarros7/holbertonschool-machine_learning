@@ -23,8 +23,7 @@ class Exponential():
                 raise TypeError("data must be a list")
             elif len(data) <= 2:
                 raise ValueError("data must contain multiple values")
-            else:
-                self.lambtha = len(data) / sum(data)
+            self.lambtha = 1 / float(sum(data) / len(data))
 
     def pdf(self, x):
         """pmf: Calculates the value of the PMF for a

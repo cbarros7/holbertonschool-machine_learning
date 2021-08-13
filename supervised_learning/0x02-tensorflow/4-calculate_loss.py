@@ -4,8 +4,8 @@ import tensorflow as tf
 
 
 def calculate_loss(y, y_pred):
-    """def calculate_loss: calculates the softmax cross-entropy
-                            loss of a prediction
+    """calculate_loss: calculates the softmax
+                        cross-entropy loss of a prediction
 
     Args:
         y is a placeholder for the labels of the input data

@@ -2,6 +2,7 @@
 """Normalization Constants"""
 import numpy as np
 
+
 def normalization_constants(X):
     """normalization_constants: calculates the normalization (standardization)
                                 constants of a matrix
@@ -12,6 +13,6 @@ def normalization_constants(X):
             nx is the number of features
     Returns: the mean and standard deviation of each feature, respectively.
     """
-    m = np.mean(X, axis= 0)
-    s = np.std(X, axis = 0)
+    m = np.mean(X, axis=0)
+    s = np.std(X, axis=0)
     return m, s

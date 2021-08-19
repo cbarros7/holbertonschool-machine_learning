@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """RMSProp"""
 import tensorflow as tf
-import numpy as np
 
 
 def create_RMSProp_op(loss, alpha, beta2, epsilon):

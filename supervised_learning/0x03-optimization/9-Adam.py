@@ -5,7 +5,7 @@ import numpy as np
 
 def update_variables_Adam(alpha, beta1, beta2, epsilon, var, grad, v, s, t):
     """update_variables_Adam: updates a variable in place using
-                                the Adam optimization algorithm
+                            the Adam optimization algorithm
 
     Args:
         alpha is the learning rate

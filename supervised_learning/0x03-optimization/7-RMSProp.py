@@ -4,7 +4,8 @@ import tensorflow as tf
 import numpy as np
 
 
-def update_variables_RMSProp(alpha, beta2, epsilon, var, grad, s):
+def update_variables_RMSProp(alpha, beta2, epsilon,
+                             var, grad, s):
     """update_variables_RMSProp: updates a variable using the
                                 RMSProp optimization algorithm
 

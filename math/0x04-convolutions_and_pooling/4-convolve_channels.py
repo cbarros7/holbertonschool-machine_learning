@@ -5,7 +5,7 @@ import numpy as np
 
 def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     """function that performs a convolution on images with channels
-    
+
     Args:
 
         images : is a numpy.ndarray with shape (m, h, w, c)

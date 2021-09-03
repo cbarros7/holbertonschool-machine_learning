@@ -5,7 +5,7 @@ import numpy as np
 
 def convolve(images, kernels, padding='same', stride=(1, 1)):
     """function that performs a convolution on images using multiple kernels
-    
+
     Args:
 
         images : is a numpy.ndarray with shape (m, h, w, c)

@@ -44,4 +44,4 @@ def convolve_grayscale_valid(images, kernel):
                 ] * kernel,
                 axis=(1, 2)
             )
-    return
+    return output

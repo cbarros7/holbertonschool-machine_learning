@@ -2,49 +2,49 @@
 """
 LeNet-5 in Keras
 """
-import tensorflow.keras as tf
+import tensorflow.keras as K
 
 
 def lenet5(X):
     """function that builds a modified version of LeNet-5"""
-    initializer = tf.initializers.he_normal()
-    layer = tf.layers.Conv2D(filters=6,
-                             kernel_size=5,
-                             padding='same',
-                             kernel_initializer=initializer,
-                             activation='relu')
+    initializer = K.initializers.he_normal()
+    layer = K.layers.Conv2D(filters=6,
+                            kernel_size=5,
+                            padding='same',
+                            kernel_initializer=initializer,
+                            activation='relu')
     output = layer(X)
-    layer = tf.layers.MaxPool2D(pool_size=2,
-                                strides=2)
+    layer = K.layers.MaxPool2D(pool_size=2,
+                               strides=2)
     output = layer(output)
-    layer = tf.layers.Conv2D(filters=16,
-                             kernel_size=5,
-                             padding='valid',
-                             kernel_initializer=initializer,
-                             activation='relu')
+    layer = K.layers.Conv2D(filters=16,
+                            kernel_size=5,
+                            padding='valid',
+                            kernel_initializer=initializer,
+                            activation='relu')
     output = layer(output)
-    layer = tf.layers.MaxPool2D(pool_size=2,
-                                strides=2)
+    layer = K.layers.MaxPool2D(pool_size=2,
+                               strides=2)
     output = layer(output)
-    layer = tf.layers.Flatten()
+    layer = K.layers.Flatten()
     output = layer(output)
-    layer = tf.layers.Dense(units=120,
-                            activation='relu',
-                            kernel_initializer=initializer)
+    layer = K.layers.Dense(units=120,
+                           activation='relu',
+                           kernel_initializer=initializer)
     output = layer(output)
-    layer = tf.layers.Dense(units=84,
-                            activation='relu',
-                            kernel_initializer=initializer)
+    layer = K.layers.Dense(units=84,
+                           activation='relu',
+                           kernel_initializer=initializer)
     output = layer(output)
     # here pass 'softmax' activation to the model
     # prior to compiling/training the model (not recommended)
-    layer = tf.layers.Dense(units=10,
-                            activation='softmax',
-                            kernel_initializer=initializer)
+    layer = K.layers.Dense(units=10,
+                           activation='softmax',
+                           kernel_initializer=initializer)
     output = layer(output)
 
     # instantiate a model from the Model class
-    model = tf.models.Model(inputs=X, outputs=output)
+    model = K.models.Model(inputs=X, outputs=output)
 
     # compile the model
     # here, define loss from activated ouput

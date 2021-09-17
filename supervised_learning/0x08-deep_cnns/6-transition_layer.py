@@ -9,11 +9,15 @@ def transition_layer(X, nb_filters, compression):
     as described in Densely Connected Convolutional Networks
 
     Args:
-        growth_rate: is the growth rate
-        compression: is the compression factor
+        X: is the output from the previous layer
+        nb_filters: is an integer representing the number
+            of filters in X
+        compression: is the compression factor for the
+            transition layer
 
     Returns:
-        the keras model
+        The output of the transition layer and the number of
+        filters within the output, respectively
     """
     initializer = K.initializers.he_normal()
 

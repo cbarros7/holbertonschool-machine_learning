@@ -5,8 +5,9 @@ inception_block = __import__('0-inception_block').inception_block
 
 
 def inception_network():
-    """Builds the inception network as described in Going Deeper
-      with Convolutions (2014)
+    """
+    Builds the inception network as described in Going Deeper
+    with Convolutions (2014)
     """
     # implement He et. al initialization for the layers weights
     initializer = K.initializers.he_normal(seed=None)

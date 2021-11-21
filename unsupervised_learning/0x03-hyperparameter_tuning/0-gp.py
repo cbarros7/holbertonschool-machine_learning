@@ -41,7 +41,6 @@ class GaussianProcess:
         # -> b should be a row vector for the subtraction with c
         dist_sq = a + b.reshape(1, -1) - 2 * c
         # print("dist_sq:", dist_sq)
-
         # K: covariance kernel matrix of shape (m, n)
         K = (self.sigma_f ** 2) * np.exp(-0.5 * (1 / (self.l ** 2)) * dist_sq)
 

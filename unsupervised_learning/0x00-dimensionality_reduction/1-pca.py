@@ -29,15 +29,8 @@ def pca(X, ndim):
     # since V = W -> dot(X,W) = dot(U,S) -> T = dot(U,S) -> Tr = dot(Ur,Sr)
 
     # Ensure that all dimensions have a mean of 0 across all data points
-    X = X - np.mean(X, axis=0)
+    x = X - np.mean(X, axis=0)
+    u, sigma, v = np.linalg.svd(x)
+    w = v[:ndim].T
 
-    # Compute the SVD:
-    U, S = np.linalg.svd(X)
-    # print(S)
-
-    # Compute Tr, the transformed matrix X:
-    # print(U[..., :ndim])
-    # print(np.diag(S[..., :ndim]))
-    Tr = np.matmul(U[..., :ndim], np.diag(S[..., :ndim]))
-
-    return Tr
+    return np.matmul(x, w)

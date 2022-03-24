@@ -32,7 +32,7 @@ def pca(X, ndim):
     X = X - np.mean(X, axis=0)
 
     # Compute the SVD:
-    U, S, Vt = np.linalg.svd(X)
+    U, S = np.linalg.svd(X)
     # print(S)
 
     # Compute Tr, the transformed matrix X:

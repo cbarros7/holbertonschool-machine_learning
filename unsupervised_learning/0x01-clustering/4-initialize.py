@@ -7,33 +7,32 @@ kmeans = __import__('1-kmeans').kmeans
 
 
 def initialize(X, k):
-    """function that initializes variables for a Gaussian Mixture Model"""
+    """
+    Function  that initializes variables for a Gaussian Mixture Model
 
-    if not isinstance(X, np.ndarray) or X.ndim != 2:
+    Arguments:
+     - X is a numpy.ndarray of shape (n, d) containing the data set
+     - k is a positive integer containing the number of clusters
+
+    Returns:
+     pi, m, S, or None, None, None on failure
+         - pi is a numpy.ndarray of shape (k,) containing the priors for each
+            cluster, initialized evenly
+         - m is a numpy.ndarray of shape (k, d) containing the centroid means
+            for each cluster, initialized with K-means
+         - S is a numpy.ndarray of shape (k, d, d) containing the covariance
+            matrices for each cluster, initialized as identity matrices
+    """
+
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None, None, None
 
-    # n: number of dada points
-    # d: dimension of each data point
+    if type(k) != int or k <= 0:
+        return None, None, None
+
     n, d = X.shape
-    # print(X.shape)
-    # print(X)
-
-    if not isinstance(k, int) or k <= 0 or k > n:
-        return None, None, None
-
-    # Initialize the "pi" array of shape (k,)
-    # containing the priors for each cluster
-    pi = np.full(shape=(k,), fill_value=1/k)
-
-    # Initialize the "m" array of shape (k, d) containing
-    # the centroid means for each cluster, initialized with K-means;
-    # output is an array of coordinates
+    pi = np.tile(1/k, (k,))
     m, _ = kmeans(X, k)
-
-    # Initialize the "S" array of shape (k, d, d) containing
-    # the covariance matrices for each cluster,
-    # initialized as identity matrices
-    Sij = np.diag(np.ones(d))
-    S = np.tile(Sij, (k, 1)).reshape(k, d, d)
+    S = np.tile(np.identity(d), (k, 1, 1))
 
     return pi, m, S

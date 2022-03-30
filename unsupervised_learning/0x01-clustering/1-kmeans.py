@@ -1,46 +1,47 @@
 #!/usr/bin/env python3
-""" doc """
+""" K means """
+
 import numpy as np
 
 
-def initialize(X, k):
-    """ doc """
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
-        return None, None
-    if type(k) is not int or k <= 0:
-        return None, None
-
-    minimum = np.amin(X, axis=0)
-    maximum = np.amax(X, axis=0)
-
-    return np.random.uniform(minimum, maximum, (k, X.shape[1]))
-
-
 def kmeans(X, k, iterations=1000):
-    """ doc """
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
-        return None, None
+    """
+    Performs K-means on a dataset
+    :param X: numpy.ndarray of shape (n, d) containing the dataset that will
+    be used for K-means clustering
+        n is the number of data points
+        d is the number of dimensions for each data point
+    :param iterations: positive integer containing the maximum number of
+    iterations that should be performed
+    :return: C, clss, or None, None on failure
+        C is a numpy.ndarray of shape (k, d) containing the centroid means
+        for each cluster
+        clss is a numpy.ndarray of shape (n,) containing the index of the
+        cluster in C that each data point belongs to
+    """
     if type(k) is not int or k <= 0:
         return None, None
-    if type(iterations) != int or iterations <= 0:
+    if type(X) is not np.ndarray or len(X.shape) != 2:
         return None, None
-
-    centroids = initialize(X, k)
-    labels = None
+    if type(iterations) is not int or iterations <= 0:
+        return None, None
+    n, d = X.shape
+    centroids = np.random.uniform(np.min(X, axis=0), np.max(X, axis=0),
+                                  size=(k, d))
     for i in range(iterations):
-        centroids_cpy = np.copy(centroids)
-        distance = np.linalg.norm(X[:, None] - centroids, axis=-1)
-        labels = np.argmin(distance, axis=-1)
+        copy = centroids.copy()
+        D = np.sqrt(((X - centroids[:, np.newaxis]) ** 2).sum(axis=2))
+        clss = np.argmin(D, axis=0)
         for j in range(k):
-            index = np.argwhere(labels == j)
-            if not len(index):
-                centroids[j] = initialize(X, 1)
+            if len(X[clss == j]) == 0:
+                centroids[j] = np.random.uniform(np.min(X, axis=0),
+                                                 np.max(X, axis=0),
+                                                 size=(1, d))
             else:
-                centroids[j] = np.mean(X[index], axis=0)
-        if (centroids_cpy == centroids).all():
-            return centroids, labels
+                centroids[j] = (X[clss == j]).mean(axis=0)
+        D = np.sqrt(((X - centroids[:, np.newaxis]) ** 2).sum(axis=2))
+        clss = np.argmin(D, axis=0)
+        if np.all(copy == centroids):
+            return centroids, clss
 
-    distance = np.linalg.norm(X[:, None] - centroids, axis=-1)
-    labels = np.argmin(distance, axis=-1)
-
-    return centroids, labels
+    return centroids, clss

@@ -1,44 +1,40 @@
 #!/usr/bin/env python3
-"""
-5-pdf.py
-"""
+""" clustering """
 import numpy as np
 
 
 def pdf(X, m, S):
     """
-    function that calculates the probability density function
-    of a Gaussian distribution
+    Calculates the probability density function of a Gaussian distribution
+    :param X: numpy.ndarray of shape (n, d) containing the data points whose
+    PDF should be evaluated
+    :param m: numpy.ndarray of shape (d,) containing the mean of the
+    distribution
+    :param S: numpy.ndarray of shape (d, d) containing the covariance of the
+    distribution
+    :return: P, or None on failure
+        P is a numpy.ndarray of shape (n,) containing the PDF values for each
+        data point
     """
-
-    if not isinstance(X, np.ndarray) or X.ndim != 2:
+    if type(X) is not np.ndarray or len(X.shape) != 2:
         return None
-    if not isinstance(m, np.ndarray) or m.ndim != 1:
+    if type(m) is not np.ndarray or len(m.shape) != 1:
         return None
-    if not isinstance(S, np.ndarray) or S.ndim != 2:
+    if type(S) is not np.ndarray or len(S.shape) != 2:
         return None
     if X.shape[1] != m.shape[0] or X.shape[1] != S.shape[0]:
         return None
     if S.shape[0] != S.shape[1]:
         return None
+    d = S.shape[0]
 
-    # n: number of dada points
-    # d: dimension of each data point
-    n, d = X.shape
+    det = np.linalg.det(S)
+    inv = np.linalg.inv(S)
+    first = 1 / ((2 * np.pi) ** (d / 2) * np.sqrt(det))
+    second = np.dot((X - m), inv)
+    third = np.sum(second * (X - m) / -2, axis=1)
+    P = first * np.exp(third)
 
-    # Compute the pdf
-    A = 1.0 / np.sqrt(((2 * np.pi) ** d) * np.linalg.det(S))
-    # The following operation is computationally more expensives than need be:
-    # B = np.exp(-0.5 * np.diag(np.linalg.multi_dot([(X - m),
-    #                                                np.linalg.inv(S),
-    #                                                (X - m).T])))
-    # Instead minimize computation cost by applying the following operation:
-    # (provided for the optimization of this task)
-    M = np.matmul(np.linalg.inv(S), (X - m).T)
-    B = np.exp(-0.5 * np.sum((X - m).T * M, axis=0))
-    PDF = A * B
+    P = np.maximum(P, 1e-300)
 
-    # All values in P should have a minimum value of 1e-300
-    PDF = np.maximum(PDF, 1e-300)
-
-    return PDF
+    return P

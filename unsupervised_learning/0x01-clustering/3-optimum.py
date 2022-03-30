@@ -1,54 +1,50 @@
 #!/usr/bin/env python3
-"""
-3-optimum.py
-"""
+""" Clustering """
 import numpy as np
 kmeans = __import__('1-kmeans').kmeans
 variance = __import__('2-variance').variance
 
 
 def optimum_k(X, kmin=1, kmax=None, iterations=1000):
-    """function that tests for the optimum number of clusters by variance"""
-
-    if not isinstance(X, np.ndarray) or X.ndim != 2:
+    """
+    Tests for the optimum number of clusters by variance
+    :param X: numpy.ndarray of shape (n, d) containing the data set
+    :param kmin: positive integer containing the minimum number of clusters
+    to check for (inclusive)
+    :param kmax: positive integer containing the maximum number of clusters
+    to check for (inclusive)
+    :param iterations: positive integer containing the maximum number of
+    iterations for K-means
+    :return: results, d_vars, or None, None on failure
+        results is a list containing the outputs of K-means for each cluster
+        size
+        d_vars is a list containing the difference in variance from the
+        smallest cluster size for each cluster size
+    """
+    if type(X) is not np.ndarray or len(X.shape) != 2:
+        return None, None
+    if type(iterations) is not int or iterations <= 0:
+        return None, None
+    if type(kmin) is not int or kmin < 1:
+        return None, None
+    if kmax is not None and (type(kmax) is not int or kmax < 1):
+        return None, None
+    if kmax is not None and kmin >= kmax:
         return None, None
 
-    # n: number of dada points
-    # d: dimension of each data point
     n, d = X.shape
-
     if kmax is None:
         kmax = n
-    if not isinstance(kmin, int) or kmin <= 0 or n <= kmin:
-        return None, None
-    if not isinstance(kmax, int) or kmax <= 0 or n < kmax:
-        return None, None
-    if kmin >= kmax:
-        return None, None
-    if not isinstance(iterations, int) or iterations <= 0:
-        return None, None
 
-    # Initialize list of tuples (C, clss)
     results = []
-    # Initialize list of total intra-cluster variances
-    variances = []
-    # Initialize the list of difference in variance from
-    # the smallest cluster size for each cluster size
     d_vars = []
-
-    # Iterate over the number of clusters under consideration
     for k in range(kmin, kmax + 1):
-
-        # Compute the cluster centroids C (means; coordinates and the
-        # 1D array of data point-centroid assignement in a call to kmeans()
-        C, clss = kmeans(X, k, iterations)
+        C, clss = kmeans(X, k, iterations=1000)
         results.append((C, clss))
 
-        # Compute the corresponding total intra-cluster variance
+        if k == kmin:
+            first_var = variance(X, C)
         var = variance(X, C)
-        variances.append(var)
-
-    for var in variances:
-        d_vars.append(np.abs(variances[0] - var))
+        d_vars.append(first_var - var)
 
     return results, d_vars
